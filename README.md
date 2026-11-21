@@ -7,6 +7,16 @@ I casi puliti li chiude senza chiedere niente. Si ferma solo dove serve una pers
 persona giusta: il profilo che può approvare quella cosa. Un processo semplice resta semplice,
 ma automatico.
 
+**In una run:** 6 mail, una in tedesco. 3 fatture registrate da sole; 3 eccezioni (un prezzo
+diverso dall'ordine, un cambio IBAN sospetto bloccato, un sollecito di una fattura già pagata);
+una distinta SEPA da 1.716,20 € pronta per l'home banking. Circa 100 secondi e tre approvazioni
+umane, ognuna del profilo giusto.
+
+**Cosa c'è di nuovo.** Oggi ogni strumento fa un pezzo: l'autofattura fa il TD18, la banca
+controlla il nome sull'IBAN. Quadra porta la pratica da capo a fondo: abbina anche la fattura
+estera, fuori dallo SdI, a ordine e bolla; tratta il testo delle mail come dato e non come ordine;
+arriva fino al bonifico. Il modello legge e decide il percorso, i soldi stanno nel codice.
+
 La sfida B contiene già la A: prima di pagare una fattura bisogna smistare la casella fornitori
 (fatture, solleciti, cambi di IBAN, richieste). Quadra fa il triage della posta in arrivo e poi
 porta ogni pratica fino in fondo.
@@ -116,14 +126,34 @@ Tutti i soldi passano dal codice, mai dal modello. Per questo il modello si può
 Gemini su Vertex, domani un modello open-weight ospitato in Europa o in azienda, con le stesse
 regole. Anche la regione di Vertex è un'impostazione (`GOOGLE_CLOUD_LOCATION`).
 
+## Oltre il prototipo
+
+Le regole sono già quelle vere; cambiano solo gli adattatori ai lati.
+
+1. **Prima settimana.** `src/store.ts` legge ordini, DDT e anagrafica dal gestionale (API o
+   database) invece che da `data/seed.json`. La casella diventa la PEC o il canale SdI
+   dell'intermediario: l'XML FatturaPA è già lo stesso formato.
+2. **Primo mese, in ombra.** Quadra gira sulla posta vera ma propone soltanto: Contabilità
+   confronta le sue decisioni con le proprie e si misura quante fatture chiude da sola.
+3. **Poi si accende.** Registrazioni automatiche per le fatture pulite, approvazioni per profilo
+   per tutto quello che esce. La distinta pain.001.001.09 si carica già così com'è nell'home
+   banking; il passo dopo è l'API della banca o CBI, con la stessa approvazione, e la
+   riconciliazione con l'estratto conto camt.053.
+
+Restano da fare: lettura dei PDF veri (Gemini li legge già), controllo VIES della partita IVA,
+riconciliazione bancaria.
+
 ## Avvio
 
 Serve Node 24 (esegue i `.ts` direttamente).
 
 ```bash
-npm install
+npm ci --ignore-scripts
 copy .env.example .env
 ```
+
+`--ignore-scripts` salta la compilazione di `better-sqlite3`, una dipendenza facoltativa che Quadra
+non usa e che su Windows con Node 24 richiede gli strumenti di build.
 
 In `.env`, con **Vertex AI** (consigliato):
 
@@ -135,7 +165,7 @@ In `.env`, con **Vertex AI** (consigliato):
 In alternativa, una chiave AI Studio in `GEMINI_API_KEY` con `GOOGLE_GENAI_USE_VERTEXAI=false`.
 
 ```bash
-npm run check:gemini   # la demo intera con il modello vero, 40-80 s
+npm run check:gemini   # la demo intera con il modello vero, circa 100 s
 npm start              # http://localhost:8080
 ```
 
