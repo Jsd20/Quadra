@@ -11,7 +11,7 @@ import type { AddressInfo } from 'node:net';
 import { readFileSync, rmSync } from 'node:fs';
 import { createApp, friendly, quotaMessage, type Step } from '../src/server.ts';
 import { store } from '../src/store.ts';
-import { outDir, checkInvoiceAgainstOrder, integrationDeadline } from '../src/tools.ts';
+import { outDir, checkInvoiceAgainstOrder, integrationDeadline, replyTarget } from '../src/tools.ts';
 import { mailLive, supplierAlias } from '../src/mail.ts';
 
 type Call = { id: string; name: string; args: Record<string, unknown> };
@@ -241,6 +241,13 @@ try {
   if (!batch || batch.total !== 866.2 || batch.approvedBy !== 'Elena Rinaldi' || batch.profile !== 'finanza') fail('payment', store.data.payments);
   if (store.data.invoices.filter((i: any) => i.status === 'in pagamento').length !== 2) fail('invoice status after payment');
   if ((await get(`/api/files/${batch.file}`)).status !== 403) fail('Contabilità downloaded the batch');
+  // A reply is keyed by the inbox message it answers: «Re: m-203» is M-203, an id outside the inbox is refused.
+  if (replyTarget('Re: m-203') !== 'M-203' || replyTarget('M-203') !== 'M-203' || replyTarget('M-999') !== null) fail('reply target');
+  // A card already decided takes no second answer, not even from Direzione: 404, the agent is not resumed.
+  as('marta');
+  const late = await send('/api/approve', { sessionId, confirmId: mail.confirmId, confirmed: true });
+  if (late.status !== 404) fail('decided card answered again', late.status);
+  await late.text();
   as('elena');
   const csv = await (await get(`/api/files/${batch.file}`)).text();
   if (!csv.includes('866,20') || !csv.includes('IT20W0306909606100000010101') || csv.includes('IT54F')) fail('CSV', csv);

@@ -326,6 +326,8 @@ export function createApp(opts: { model: string | BaseLlm; title?: string; recor
         const who = viewer!; const profile = who.id;
         if (!sessionId || !confirmId) return json(res, 400, { error: 'sessionId e confirmId servono entrambi.' });
         const card = pending.get(confirmId);
+        // A card no longer pending (already decided, or wiped by Reset dati) takes no answer: the agent is not resumed through it.
+        if (!card) return json(res, 404, { error: 'Questa approvazione non è più in attesa: è già stata decisa o i dati sono stati azzerati.' });
         // Profile-based access: the wrong person is stopped here, before the agent sees any answer.
         if (card?.requiredProfile && card.requiredProfile !== profile) {
           const need = profiles().find((p) => p.id === card.requiredProfile);

@@ -436,6 +436,18 @@ function studioProblem(m: { to: string; body: string; inReplyTo: string }) {
 // ---------- leaving the company: human approval, profile checked by the server ----------
 
 type Outgoing = { to: string; subject: string; inReplyTo: string };
+/** The inbox message a mail answers, by its canonical id: «Re: m-203» is M-203. Null when no inbox message matches. */
+export function replyTarget(ref: string) {
+  const exact = inboxMsg(ref);
+  if (exact) return String(exact.id);
+  const hits = (store.data.inbox ?? []).filter((m) => new RegExp(`\\b${String(m.id).replace(/[.*+?^${}()|[\]\\-]/g, '\\$&')}\\b`, 'i').test(ref));
+  return hits.length === 1 ? String(hits[0].id) : null;
+}
+/** The same mail with inReplyTo set to the canonical inbox id, so the idempotency key does not depend on how the model wrote it. */
+function canonical<T extends Outgoing>(msg: T): T | null {
+  const id = replyTarget(msg.inReplyTo);
+  return id ? { ...msg, inReplyTo: id } : null;
+}
 /** One message per source (one to the supplier, one to the studio): the key ignores subject, which the model may word differently on a retry. */
 const sendKey = (m: Outgoing) => `send:${norm(m.inReplyTo)}${isAccountant(m.to) ? ':studio' : ''}`;
 /** Mail goes only to contacts in our master data, never to an address written in the text. */
@@ -455,8 +467,13 @@ export const sendMessage = new FunctionTool({
     body: z.string(),
     inReplyTo: z.string().describe('id del messaggio a cui si riferisce'),
   }),
-  requireConfirmation: (msg) => knownContact(msg.to) && !studioProblem(msg) && !store.findByKey('outbox', sendKey(msg)),
-  execute: async (msg) => {
+  requireConfirmation: (args) => {
+    const msg = canonical(args);
+    return !!msg && knownContact(msg.to) && !studioProblem(msg) && !store.findByKey('outbox', sendKey(msg));
+  },
+  execute: async (args) => {
+    const msg = canonical(args);
+    if (!msg) return { blocked: true, error: `${args.inReplyTo} non è un messaggio della casella: inReplyTo è il suo id, ad esempio M-203.` };
     if (!knownContact(msg.to)) return { blocked: true, error: `${msg.to} non è un contatto in anagrafica (fornitori o studio): non invio.` };
     const problem = studioProblem(msg);
     if (problem) return { blocked: true, error: problem };
