@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quadra</title>
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Playfair+Display:ital@0;1&amp;display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Login: the night sky with the constellation of the ram, the one bold moment. -->
+  <section id="login" class="login" hidden>
+    <svg class="sky" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <g class="dust" id="dust"></g>
+      <g class="lines">
+        <path d="M1010 250 L1150 300 L1205 352 L1232 398" />
+        <path d="M1150 300 L1118 470" />
+      </g>
+      <g class="stars">
+        <circle cx="1010" cy="250" r="4.5" /><text x="1024" y="246">Hamal</text>
+        <circle cx="1150" cy="300" r="3.6" /><text x="1164" y="296">Sheratan</text>
+        <circle cx="1205" cy="352" r="2.6" /><text x="1219" y="348">Mesarthim</text>
+        <circle cx="1232" cy="398" r="2" />
+        <circle cx="1118" cy="470" r="2.4" /><text x="1132" y="474">Botein</text>
+      </g>
+    </svg>
+    <div class="login-inner">
+      <div class="login-copy">
+        <p class="wordmark">Quadra</p>
+        <h1>Le fatture che quadrano<br><em>vanno da sole.</em></h1>
+        <p class="lede">Dalla casella fornitori alla distinta di pagamento. Ognuno vede la sua parte e firma solo
+          quello che gli spetta; la direzione vede tutto, con il registro di ogni passo.</p>
+      </div>
+      <form id="loginForm" class="login-card" autocomplete="off">
+        <h2>Accedi</h2>
+        <label>Utente <input id="username" name="username" autocomplete="username" required spellcheck="false"></label>
+        <label>Password <input id="password" name="password" type="password" autocomplete="current-password" required></label>
+        <p id="loginError" class="login-error" role="alert" hidden></p>
+        <button class="primary wide" id="loginButton">Entra</button>
+        <div class="demo-users">
+          <p>Account dimostrativi, password <code>quadra-demo</code></p>
+          <div id="demoUsers"></div>
+        </div>
+      </form>
+    </div>
+    <p class="login-foot">Officine Sereno S.r.l. è un'azienda inventata. Tutti i dati di questa demo sono finti.</p>
+  </section>
+
+  <div id="app" class="app" hidden>
+    <header class="top">
+      <div class="brand">
+        <p class="wordmark">Quadra</p>
+        <p class="brand-sub">Autopilota fornitori · <span id="company">Officine Sereno</span></p>
+      </div>
+      <div class="metrics" id="metrics" hidden></div>
+      <div class="top-actions">
+        <span class="badge" id="model" title="Modello">…</span>
+        <select id="replay" aria-label="Rivedi una prova registrata" hidden><option value="">Registrazioni</option></select>
+        <button class="ghost" id="reset" title="Riporta i dati allo stato iniziale" hidden>Reset dati</button>
+        <button class="ghost" id="newSession" title="Nuova conversazione con l'agente">Nuova sessione</button>
+        <div class="me">
+          <span class="me-name" id="meName"></span>
+          <span class="me-role" id="meRole"></span>
+        </div>
+        <button class="ghost" id="logout">Esci</button>
+      </div>
+    </header>
+
+    <main class="grid" id="grid">
+      <section class="panel" id="inboxPanel">
+        <div class="panel-head"><h2>In arrivo</h2><span class="count" id="inboxCount"></span></div>
+        <div id="inbox" class="list"></div>
+        <button class="primary wide" id="autopilot">Avvia autopilota</button>
+      </section>
+
+      <section class="panel center">
+        <div class="panel-head"><h2 id="traceTitle">L'agente al lavoro</h2><span class="status" id="status"></span></div>
+        <div id="recording" class="recording" role="status" hidden></div>
+        <div id="trace" class="trace"></div>
+        <form id="composer" class="composer">
+          <label class="attach" title="Allega PDF o immagine"><input type="file" id="file" accept="application/pdf,image/*" multiple hidden>Allega</label>
+          <div id="chips" class="chips"></div>
+          <input id="text" autocomplete="off" placeholder="Chiedi all'agente…" aria-label="Messaggio all'agente">
+          <button class="primary" id="send">Invia</button>
+        </form>
+      </section>
+
+      <section class="panel" id="dataPanel">
+        <div class="panel-head"><h2 id="dataTitle">La tua parte</h2><button class="link" id="exportAudit" hidden>Esporta registro (CSV)</button></div>
+        <div id="tabs" class="tabs" role="toolbar" aria-label="Archivi"></div>
+        <div id="table" class="table-wrap"></div>
+      </section>
+    </main>
+  </div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 1364 >>
+stream
+BT
+/F1 18 Tf 1 0 0 1 50 790 Tm (FATTURA N. 2026/1187) Tj
+/F1 11 Tf 1 0 0 1 50 762 Tm (Ricambi Dora S.r.l. - Via dei Mulini 8, 10100 Torino \(TO\) - P.IVA 00000000001) Tj
+/F1 11 Tf 1 0 0 1 50 741 Tm (info@ricambidora.example) Tj
+/F1 11 Tf 1 0 0 1 50 720 Tm ( ) Tj
+/F1 11 Tf 1 0 0 1 50 699 Tm (Cliente: Termoidraulica Sangone S.n.c. - Via Roma 12, Nichelino \(TO\)) Tj
+/F1 11 Tf 1 0 0 1 50 678 Tm (Data fattura: 16/11/2026        Scadenza: 16/12/2026) Tj
+/F1 11 Tf 1 0 0 1 50 657 Tm (Riferimento ordine cliente: O-5530) Tj
+/F1 11 Tf 1 0 0 1 50 636 Tm ( ) Tj
+/F1 11 Tf 1 0 0 1 50 615 Tm (Descrizione                                Q.ta     Prezzo      Totale) Tj
+/F1 11 Tf 1 0 0 1 50 594 Tm (Valvola miscelatrice VM-34                   12     38,00       456,00) Tj
+/F1 11 Tf 1 0 0 1 50 573 Tm (Pompa di circolazione PC-60                   3    210,00       630,00) Tj
+/F1 11 Tf 1 0 0 1 50 552 Tm (Trasporto                                     1     45,00        45,00) Tj
+/F1 11 Tf 1 0 0 1 50 531 Tm ( ) Tj
+/F1 11 Tf 1 0 0 1 50 510 Tm (Imponibile: 1.131,00 EUR    IVA 22%: 248,82 EUR    Totale: 1.379,82 EUR) Tj
+/F1 11 Tf 1 0 0 1 50 489 Tm (Pagamento: bonifico 30 gg data fattura - IBAN IT00 X000 0000 0000 0000 0000 000) Tj
+/F1 11 Tf 1 0 0 1 50 468 Tm ( ) Tj
+/F1 11 Tf 1 0 0 1 50 447 Tm (Nota: le pompe PC-60 sono in consegna separata entro il 28/11/2026.) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier /Encoding /WinAnsiEncoding >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000001656 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1751
+%%EOF

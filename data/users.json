@@ -1,0 +1,22 @@
+[
+  {
+    "username": "sara",
+    "profile": "contabilita",
+    "hash": "bdcb9f4cc7bc5c5fad6db1b0aafb49c4:abd67474d6261042eaf8eeedfad20474e9340e60711668d5e398ddd880682905"
+  },
+  {
+    "username": "luca",
+    "profile": "acquisti",
+    "hash": "a7611717680f5c322c9a5319771dd250:38c561364d67d7b8182a553e1f15f829067c90a8f2398a44ad7458efe72af2d1"
+  },
+  {
+    "username": "elena",
+    "profile": "finanza",
+    "hash": "a13ec67818258d870bb958d5a0821958:1d03ce538279cb04bf933cab80da6f2d5ec0b516bde20d7313dc7565ef374ace"
+  },
+  {
+    "username": "marta",
+    "profile": "direzione",
+    "hash": "e8f194792705cea2307cba3fbb455ccc:29a0d1f7bcc5e0e3d053558aeaa50433f0d8e3c58228181f97052e940e7ea439"
+  }
+]

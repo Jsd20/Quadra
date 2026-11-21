@@ -1,0 +1,22 @@
+HESSLER ANTRIEBSTECHNIK GmbH
+Industriestrasse 14 - 90431 Nuernberg - Germany
+VAT ID: DE287654321
+invoices@hessler-antrieb.example
+
+INVOICE / RECHNUNG No. 2026-4471
+Invoice date: 18.11.2026
+
+Bill to: Officine Sereno S.r.l., Torino, Italy
+Your order: PO 2026/0431 of 04.11.2026
+Our delivery note: LS-88213 of 13.11.2026
+
+Pos  Description                                   Qty    Unit price EUR   Amount EUR
+1    KL-6204 Deep groove ball bearing 6204-2RS     200    3.20             640.00
+2    WD-35 Radial shaft seal 35x52x7               100    2.10             210.00
+
+Net amount:                                                                850.00
+VAT 0% - Reverse charge, Art. 196 Council Directive 2006/112/EC              0.00
+Total amount due (EUR):                                                    850.00
+
+Payment terms: 30 days net, due 18.12.2026
+Bank transfer to: IBAN DE61 7605 0101 0012 3456 78
